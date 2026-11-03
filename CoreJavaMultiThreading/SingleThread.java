@@ -1,0 +1,79 @@
+package Com.globalQuest.CoreJavaMultiThreading;
+
+import java.util.Scanner;
+class Operations1 extends Thread {
+    @Override
+    public void run() {
+        if (Thread.currentThread().getName().equals("banking")) {
+            banking();
+        } 
+        else if (Thread.currentThread().getName().equals("printing")) {
+            printing();
+        } 
+        else {
+            addition();
+        }
+    }
+    // Banking operation
+    void banking() {
+        System.out.println("Banking operation started");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the accno:");
+        int accno = sc.nextInt();
+        System.out.println("Enter the pin:");
+        int pin = sc.nextInt();
+        System.out.println("Banking operation completed");
+    }
+
+    // Printing operation
+    void printing() {
+        try {
+            System.out.println("Printing operation started");
+            for (int i = 0; i <= 5; i++) {
+                System.out.println("Hello I am printing.............");
+                Thread.sleep(3000);
+            }
+            System.out.println("Printing operation completed");
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    // Addition operation
+    void addition() {
+        System.out.println("Addition operation started");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the num1:");
+        int n1 = sc.nextInt();
+        System.out.println("Enter the num2:");
+        int n2 = sc.nextInt();
+        int result = n1 + n2;
+        System.out.println("Addition result: " + result);
+        System.out.println("Addition operation completed");
+    }
+}
+
+public class SingleThread {
+    public static void main(String[] args) {
+        System.out.println("Main Started");
+        Operations1 op1 = new Operations1();
+        Operations1 op2 = new Operations1();
+        Operations1 op3 = new Operations1();
+        System.out.println(op1);
+        System.out.println(op2);
+        System.out.println(op3);
+        System.err.println("--------------");
+        op1.setName("banking");
+        op2.setName("printing");
+        op3.setName("addition");
+        System.out.println(op1);
+        System.out.println(op2);
+        System.out.println(op3);
+        System.err.println("---------------");
+
+        op1.start();
+        op2.start();
+        op3.start();
+        System.out.println("Main Terminated");
+    }
+}
